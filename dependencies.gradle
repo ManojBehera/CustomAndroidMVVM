@@ -8,6 +8,7 @@ ext {
     glideVersion = '3.7.0'
     rxJavaVersion = '1.1.6'
     rxAndroidVersion = '1.2.1'
+    mockitoVersion = '2.+'
 
     supportDependencies = [
             appCompat       : "com.android.support:appcompat-v7:${supportLibraryVersion}",
@@ -35,7 +36,8 @@ ext {
 
     testLibraries = [
             junit               : "junit:junit:4.12",
-            espressoCore        : "com.android.support.test.espresso:espresso-core:${espressoCoreVersion}"
+            espressoCore        : "com.android.support.test.espresso:espresso-core:${espressoCoreVersion}",
+            mockito             : "org.mockito:mockito-core:${mockitoVersion}"
     ]
 
 }
