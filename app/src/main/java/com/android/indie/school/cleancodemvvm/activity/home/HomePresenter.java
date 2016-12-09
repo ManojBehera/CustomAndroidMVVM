@@ -12,25 +12,25 @@ import rx.subscriptions.CompositeSubscription;
  * Created by herisulistiyanto on 12/9/16.
  */
 
-public class HomePresenter extends BasePresenter<HomeView, HomeViewModel> {
+class HomePresenter extends BasePresenter<HomeView, HomeViewModel> {
 
     private Service service;
     private CompositeSubscription subscriptions;
 
-    public HomePresenter(Service service) {
+    HomePresenter(Service service) {
         this.service = service;
         subscriptions = new CompositeSubscription();
     }
 
-    public void showProgressWait() {
+    void showProgressWait() {
         viewModel.setInProgress(true);
     }
 
-    public void removeProgressWait() {
+    void removeProgressWait() {
         viewModel.setInProgress(false);
     }
 
-    public void getCityList() {
+    void getCityList() {
         showProgressWait();
         final Subscription subscription = service.getCityList(new Service.GetCityListCallback() {
             @Override
@@ -48,19 +48,27 @@ public class HomePresenter extends BasePresenter<HomeView, HomeViewModel> {
         subscriptions.add(subscription);
     }
 
-    public void reloadCityList() {
+    void reloadCityList() {
 
         if (subscriptions.hasSubscriptions()) {
             subscriptions.clear();
         }
 
-        getCityList();
+        /*
+        Edited by sendz
+        Change to view.fetchData() so this part of code can be testable by mock because we only want
+        to verify the fetchData is called instead of checking whole getCityList checking
+         */
+        view.fetchData();
     }
 
-    public void onStop() {
+    void onStop() {
         if (!subscriptions.isUnsubscribed()) {
-            subscriptions.unsubscribe();
+            /*
+            * Edited by sendz
+            * Changed to .clear() to avoid subscriptions issue such as infinite loading on subscriptions
+             */
+            subscriptions.clear();
         }
     }
-
 }
