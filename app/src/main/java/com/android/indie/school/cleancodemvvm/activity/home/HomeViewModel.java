@@ -11,14 +11,14 @@ import com.android.databinding.library.baseAdapters.BR;
 
 public class HomeViewModel extends BaseObservable {
 
-    public boolean isInProgress = false;
+    private boolean isInProgress = false;
 
     @Bindable
     public boolean isInProgress() {
         return isInProgress;
     }
 
-    public void setInProgress(boolean inProgress) {
+    void setInProgress(boolean inProgress) {
         this.isInProgress = inProgress;
         notifyPropertyChanged(BR.inProgress);
     }
