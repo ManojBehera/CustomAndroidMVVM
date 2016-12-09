@@ -124,4 +124,10 @@ public class HomeActivity extends BaseActivity<ActivityMainBinding, HomeViewMode
     protected void onPause() {
         super.onPause();
     }
+
+    @Override
+    protected void onStop() {
+        presenter.onStop();
+        super.onStop();
+    }
 }
